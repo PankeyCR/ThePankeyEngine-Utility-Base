@@ -19,18 +19,18 @@ namespace pankey{
 					TPC(){}
 					virtual ~TPC(){}
 					
-					virtual long tpc(){
+					virtual long long tpc(){
 						return m_tpc;
 					}
 
-					virtual void initialize(long a_time){
+					virtual void initialize(long long a_time){
 						this->m_init = true;
 						this->m_prev = a_time;
 						this->m_now = a_time;
 						this->m_tpc = 0;
 					}
 
-					virtual long generateTpc(long a_time){
+					virtual long long generateTpc(long long a_time){
 						this->m_now = a_time;
 
 						this->m_tpc = this->m_now - this->m_prev;
@@ -39,7 +39,13 @@ namespace pankey{
 						return this->m_tpc;
 					}
 
-					virtual long initialize_generateTpc(long a_time){
+					virtual long long generateTpc(long long a_time, long long a_prev_time){
+						long long i_tpc = a_time - a_prev_time;
+
+						return i_tpc;
+					}
+
+					virtual long long initialize_generateTpc(long long a_time){
 						if(!this->m_init){
 							this->initialize(a_time);
 						}
@@ -49,9 +55,9 @@ namespace pankey{
 				protected:
 					bool m_init = false;	
 
-					long m_now = 0;
-					long m_prev = 0;
-					long m_tpc = 0;
+					long long m_now = 0;
+					long long m_prev = 0;
+					long long m_tpc = 0;
 			};
 
 		}
